@@ -1,0 +1,243 @@
+```html
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
+<style>
+
+.recipe-container{
+    max-width:900px;
+    margin:30px auto;
+}
+
+.recipe-card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.recipe-title{
+    text-align:center;
+    color:#2c3e50;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.recipe-info{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.info-box{
+    background:#f8f9fa;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+}
+
+.info-box h4{
+    color:#28a745;
+    margin-bottom:8px;
+}
+
+.section{
+    margin-top:30px;
+}
+
+.section h2{
+    color:#2c3e50;
+    margin-bottom:15px;
+}
+
+.ingredients{
+    list-style:none;
+    padding:0;
+}
+
+.ingredients li{
+    background:#e9ecef;
+    margin-bottom:10px;
+    padding:12px;
+    border-radius:8px;
+}
+
+.steps{
+    padding-left:25px;
+}
+
+.steps li{
+    margin-bottom:12px;
+    line-height:1.6;
+}
+
+.buttons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.btn{
+    text-decoration:none;
+    background:#28a745;
+    color:white;
+    padding:12px 25px;
+    border-radius:8px;
+    font-size:17px;
+}
+
+.btn:hover{
+    background:#218838;
+}
+
+.print-btn{
+    border:none;
+    cursor:pointer;
+}
+
+.success{
+    margin-top:30px;
+    background:#d4edda;
+    color:#155724;
+    padding:15px;
+    border-radius:8px;
+    text-align:center;
+    font-size:18px;
+}
+
+@media(max-width:768px){
+
+.recipe-info{
+grid-template-columns:1fr 1fr;
+}
+
+.buttons{
+flex-direction:column;
+}
+
+.btn{
+text-align:center;
+}
+
+}
+
+</style>
+
+<div class="recipe-container">
+
+<div class="recipe-card">
+
+<h1 class="recipe-title">
+🍲 {{ recipe.title }}
+</h1>
+
+<div class="recipe-info">
+
+<div class="info-box">
+<h4>🌍 Cuisine</h4>
+<p>{{ recipe.cuisine }}</p>
+</div>
+
+<div class="info-box">
+<h4>🍽 Meal</h4>
+<p>{{ recipe.meal_type }}</p>
+</div>
+
+<div class="info-box">
+<h4>🥗 Diet</h4>
+<p>{{ recipe.diet }}</p>
+</div>
+
+<div class="info-box">
+<h4>⏱ Time</h4>
+<p>{{ recipe.time }}</p>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>
+🥕 Ingredients
+</h2>
+
+<ul class="ingredients">
+
+{% for ingredient in recipe.ingredients %}
+
+<li>
+{{ ingredient|title }}
+</li>
+
+{% empty %}
+
+<li>
+No ingredients available.
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>
+👨‍🍳 Cooking Instructions
+</h2>
+
+<ol class="steps">
+
+{% for step in recipe.instructions %}
+
+<li>
+{{ step }}
+</li>
+
+{% empty %}
+
+<li>
+No instructions available.
+</li>
+
+{% endfor %}
+
+</ol>
+
+</div>
+
+<div class="success">
+
+🎉 Your AI Recipe is Ready!<br>
+
+Enjoy your delicious homemade meal.
+
+</div>
+
+<div class="buttons">
+
+<a href="{% url 'home' %}" class="btn">
+🏠 Create Another Recipe
+</a>
+
+<button
+onclick="window.print()"
+class="btn print-btn">
+
+🖨 Print Recipe
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
+```
+
